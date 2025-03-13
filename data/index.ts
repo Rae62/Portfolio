@@ -84,7 +84,7 @@ export const navItems = [
       des: "This project will be fire once i move my ass",
       img: "/p2.svg",
       iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-      link: "www.linkedin.com/in/ludovic-duhamel-247061231",
+      link: "https://www.linkedin.com/in/ludovic-duhamel-247061231",
     },
     {
       id: 3,
@@ -92,7 +92,7 @@ export const navItems = [
       des: "This project will be fire once i move my ass",
       img: "/p3.svg",
       iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-      link: "www.linkedin.com/in/ludovic-duhamel-247061231",
+      link: "https://www.linkedin.com/in/ludovic-duhamel-247061231",
     },
     {
       id: 4,
@@ -100,7 +100,7 @@ export const navItems = [
       des: "This project will be fire once i move my ass",
       img: "/p4.svg",
       iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-      link: "www.linkedin.com/in/ludovic-duhamel-247061231",
+      link: "https://www.linkedin.com/in/ludovic-duhamel-247061231",
     },
   ];
   
