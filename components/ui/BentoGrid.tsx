@@ -8,8 +8,23 @@ import { cn } from '@/utils/cn';
 import MagicButton from '../MagicButton';
 import { GlobeDemo } from './GridGlobe';
 
-// Création d'un composant wrapper pour Lottie
-const LottieWrapper = (props) => {
+// Définition du type pour les props Lottie
+interface LottieProps {
+  options: {
+    loop: boolean;
+    autoplay: boolean;
+    animationData: any;
+    rendererSettings: {
+      preserveAspectRatio: string;
+    };
+  };
+  height: number;
+  width: number;
+  isStopped: boolean;
+}
+
+// Création d'un composant wrapper pour Lottie avec type défini
+const LottieWrapper = (props: LottieProps) => {
   const [isMounted, setIsMounted] = useState(false);
   
   useEffect(() => {
@@ -17,10 +32,12 @@ const LottieWrapper = (props) => {
     return () => setIsMounted(false);
   }, []);
   
-  // Importer le composant Lottie réel seulement côté client
-  const LottieComponent = require('react-lottie').default;
+  // Pour éviter les erreurs de SSR, n'importer que côté client
+  if (!isMounted) return null;
   
-  return isMounted ? <LottieComponent {...props} /> : null;
+  // Importer dynamiquement uniquement côté client
+  const LottieComponent = require('react-lottie').default;
+  return <LottieComponent {...props} />;
 };
 
 // Chargement dynamique du wrapper Lottie
@@ -67,6 +84,12 @@ export const BentoGridItem = ({
   const leftLists = ['ReactJS', 'Express', 'Typescript'];
   const rightLists = ['VueJS', 'NuxtJS', 'GraphQL'];
   const [copied, setCopied] = useState(false);
+  const [isBrowser, setIsBrowser] = useState(false);
+
+  // Détection du navigateur pour éviter les erreurs SSR
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
 
   const defaultOptions = {
     loop: copied,
@@ -81,7 +104,7 @@ export const BentoGridItem = ({
     const text = "s0974092@gmail.com";
     navigator.clipboard.writeText(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 3000)
+    setTimeout(() => setCopied(false), 3000);
   };
 
   return (
@@ -96,7 +119,7 @@ export const BentoGridItem = ({
       }}
     >
       {/* add img divs */}
-      <div className={`${id === 6 && 'flex justify-center'} h-full`}>
+      <div className={`${id === 6 ? 'flex justify-center' : ''} h-full`}>
         <div className='w-full h-full absolute'>
            {img && (
             <img
@@ -107,8 +130,7 @@ export const BentoGridItem = ({
           )}
         </div>
         <div
-          className={`absolute right-0 -bottom-5 ${id === 5 && 'w-full opacity-80'
-            } `}
+          className={`absolute right-0 -bottom-5 ${id === 5 ? 'w-full opacity-80' : ''}`}
         >
           {spareImg && (
             <img
@@ -119,10 +141,7 @@ export const BentoGridItem = ({
           )}
         </div>
         {id === 6 && (
-          // add background animation , remove the p tag
-          <BackgroundGradientAnimation>
-            {/* <div className='absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl'></div> */}
-          </BackgroundGradientAnimation>
+          <BackgroundGradientAnimation />
         )}
 
         <div className={cn(
@@ -151,10 +170,10 @@ export const BentoGridItem = ({
                     {item}
                   </span>
                 ))}
-                <span className='lg:py-4 lg:px-3 py-4 px-3  rounded-lg text-center bg-[#10132E]'></span>
+                <span className='lg:py-4 lg:px-3 py-4 px-3 rounded-lg text-center bg-[#10132E]'></span>
               </div>
               <div className='flex flex-col gap-3 md:gap-3 lg:gap-8'>
-                <span className='lg:py-4 lg:px-3 py-4 px-3  rounded-lg text-center bg-[#10132E]'></span>
+                <span className='lg:py-4 lg:px-3 py-4 px-3 rounded-lg text-center bg-[#10132E]'></span>
                 {rightLists.map((item, i) => (
                   <span
                     key={i}
@@ -170,16 +189,15 @@ export const BentoGridItem = ({
 
           {id === 6 && (
             <div className='mt-5 relative'>
-              <div
-                className={`absolute -bottom-5 right-0 ${copied ? 'block' : 'block'
-                  }`}
-              >
-                {copied && <Lottie 
-                  options={defaultOptions} 
-                  height={200} 
-                  width={400} 
-                  isStopped={!copied} 
-                />}
+              <div className={`absolute -bottom-5 right-0 ${copied ? 'block' : 'block'}`}>
+                {isBrowser && copied && (
+                  <Lottie 
+                    options={defaultOptions} 
+                    height={200} 
+                    width={400} 
+                    isStopped={!copied} 
+                  />
+                )}
               </div>
 
               <MagicButton
@@ -188,13 +206,11 @@ export const BentoGridItem = ({
                 position='left'
                 handleClick={handleCopy}
                 otherClasses='!bg-[#161A31]'
-                // isDisabled={copied}
               />
             </div>
           )}
         </div>
       </div>
-
     </div>
   );
 };
