@@ -12,17 +12,17 @@ const Approach = () => {
         </h1>
       <div className="my-20 flex flex-col lg:flex-row items-center justify-center gap-4">
         <Card title="Planning & Strategy" icon={<AceternityIcon order='Phase 1'/>}
-          description="I am a description">
+          description="This is the foundation of every project. I analyze your needs, define a clear strategy, and create models of your site to refine and optimize the vision. My expertise ensures a solid technical base, helping to adjust and improve your solution before development begins.">
           <CanvasRevealEffect
             animationSpeed={5.1}
             containerClassName="bg-emerald-900"
           />
         </Card>
         <Card title="Development & Progress Update" icon={<AceternityIcon order='Phase 2' />}
-        description="I am a description">
+        description="With a clear strategy in place, I bring your project to life step by step. I follow the defined process while keeping you updated on progress, ensuring transparency and flexibility. This phase allows for adjustments based on your feedback, making sure the final product aligns perfectly with your vision.">
           <CanvasRevealEffect
             animationSpeed={3}
-            containerClassName="bg-black"
+            containerClassName="bg-pink-900"
             colors={[
               [236, 72, 153],
               [232, 121, 249],
@@ -32,7 +32,7 @@ const Approach = () => {
         
         </Card>
         <Card title="Development & Launch" icon={<AceternityIcon order='Phase 3' />}
-        description="I am a description">
+        description="In this final phase, I complete the development based on our agreed plan. Before going live, we do a final check together to ensure everything meets your expectations. Once launched, I stay involved, providing follow-up and support to maintain quality and gather valuable feedback.">
           <CanvasRevealEffect
             animationSpeed={3}
             containerClassName="bg-sky-600"
