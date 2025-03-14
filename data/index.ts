@@ -72,11 +72,11 @@ export const navItems = [
   export const projects = [
     {
       id: 1,
-      title: "Projet 1",
-      des: "This project will be fire once i move my ass",
-      img: "/p1.svg",
-      iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-      link:"https://www.facebook.com/",
+      title: "Crown Clothing",
+      des: "This project helped me to get the base of react also making me practice session , google auth and stripe !",
+      img: "/CClothing.svg",
+      iconLists: ["/re.svg", "/tail.svg", "/Google.svg","/Stripe.svg",],
+      link:"https://incomparable-boba-9bea1e.netlify.app/",
     },
     {
       id: 2,
